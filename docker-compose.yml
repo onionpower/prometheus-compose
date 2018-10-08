@@ -1,0 +1,27 @@
+#don't forget to share drives on windows docker daemon
+version: "3.2"
+services: 
+  prom:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      #osx
+      - /Users/user/repos/prometheus-compose:/etc/prometheus/
+      - /Users/user/repos/prometheus-compose/prometheus/prometheus-custom.yml:/etc/prometheus/prometheus.yml
+      #windows
+      # - /c/repos/prom/prometheus-compose/:/etc/prometheus/
+      # - /c/repos/prom/prometheus-compose/prometheus-custom.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    # network_mode: host
+    # networks:
+    #   - dockernet
+  dockerhost:
+    image: qoomon/docker-host
+    cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
+    # mem_limit: 4M
+    restart: on-failure
+networks:
+  dockernet:
+    external: true
