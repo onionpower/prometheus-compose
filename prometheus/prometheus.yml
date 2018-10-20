@@ -1,0 +1,22 @@
+global:
+  scrape_interval:     5s
+  external_labels:
+    monitor: 'codelab-monitor'
+
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: [
+        'localhost:9090',
+        'dockerhost:5000',
+        'dockerhost:5001',
+        'dockerhost:5002',
+        'dockerhost:5003',
+        'dockerhost:5004',
+        'dockerhost:5005',
+        'dockerhost:5006',
+        'dockerhost:5007',
+        'dockerhost:5008',
+        'dockerhost:5009',
+        'dockerhost:5010']
